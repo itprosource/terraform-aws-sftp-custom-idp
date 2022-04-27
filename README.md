@@ -20,4 +20,4 @@ Secret Strings to log in, which are:
 3. HomeDirectory (optional, not required)
 
 After the template is deployed, you will need to access the Secret(s) in Secrets Manager
-and manually enter the above Secret String.
+and manually enter the above Secret Strings. 
