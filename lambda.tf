@@ -15,7 +15,7 @@ resource "aws_lambda_function" "lambda" {
 
   environment {
     variables = {
-      SecretsManagerRegion = "us-east-1"
+      SecretsManagerRegion = "${data.aws_region.current.name}"
     }
   }
 }
