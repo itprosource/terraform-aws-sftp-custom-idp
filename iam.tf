@@ -1,8 +1,3 @@
-# Data source which pulls the AWS account ID and region from Provider.
-# Used later in aws_iam_policy.sftp-attach
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 resource "aws_iam_role" "sftp_role" {
   name = "custom_idp_sftp_role"
 
