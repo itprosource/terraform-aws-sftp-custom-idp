@@ -79,7 +79,7 @@ resource "aws_iam_policy" "secrets" {
         "Action": [
           "secretsmanager:GetSecretValue"
         ],
-        "Resource": "arn:aws:secretsmanager:${var.region}:${data.aws_caller_identity.current.account_id}:secret:SFTP/*",
+        "Resource": "arn:aws:secretsmanager:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:secret:SFTP/*",
         "Effect": "Allow"
       }
     ]
