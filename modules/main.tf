@@ -11,7 +11,6 @@ module "sftp" {
   # Create a name that will be used to either tag most resources or prefix to their resource name
   # for identification purposes.
   name        = "sftp-example"
-  region      = "us-east-1"
 
   # Set your VPC network details.
   cidr        = "10.0.1.0/24"
@@ -29,11 +28,11 @@ module "sftp" {
   }
 
   idp_users = {
-    bsmith = {
+    bsmith01 = {
       Password = var.bsmith_pw
       HomeDirectory = "bsmith-home"
     },
-    svc_acct-app = {
+    svc_acct-app01 = {
       Password = var.svc-acct-app_pw
       HomeDirectory = "accounting"
     }
