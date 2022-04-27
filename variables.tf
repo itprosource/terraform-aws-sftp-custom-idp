@@ -46,11 +46,13 @@ variable "security_policy_name" {
   default = ""
 }
 
+/*
 variable "idp_users" {
   type = map(map(string))
   description = ""
   default = {}
 }
+*/
 
 variable "secrets" {
   type = map(string)
@@ -62,4 +64,16 @@ variable "rest_api_name" {
   type = string
   description = ""
   default = ""
+}
+
+variable "create_s3_bucket" {
+  type = bool
+  description = ""
+  default = false
+}
+
+variable "folders" {
+  type = map(string)
+  description = ""
+  default = {}
 }
