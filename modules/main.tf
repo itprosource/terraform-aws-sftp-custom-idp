@@ -3,6 +3,7 @@ provider "aws" {
 }
 
 variable "bsmith_pw" {}
+variable "svc-acct-app_pw" {}
 
 module "sftp" {
   source = "../"
@@ -27,25 +28,13 @@ module "sftp" {
     folder02  = "accounting"
   }
 
-  # Name your SFTP user accounts.
-  # To add an additional user, enter the next user number (user03, etc) and set it equal to the username.
-  # The user number will not appear in AWS, it's ony used by Terraform to order the secrets.
-  # Only the username will be used to name the secret.
-  /*
-  secrets = {
-    user01    = "bsmith",
-    user02    = "svc-acct-app"
-  }
-  */
-  # NOTE: In the current use-case, the secret strings containing password, role, etc are all meant to be
-  # input manually. See the README for more info.
-
   idp_users = {
     bsmith = {
       Password = var.bsmith_pw
       HomeDirectory = "bsmith-home"
     },
     svc_acct-app = {
+      Password = var.svc-acct-app_pw
       HomeDirectory = "accounting"
     }
   }
