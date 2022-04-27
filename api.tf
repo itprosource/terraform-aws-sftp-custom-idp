@@ -154,7 +154,8 @@ resource "aws_iam_role" "transfer_role" {
           "Action": [
             "execute-api:Invoke"
           ],
-          "Resource": "arn:aws:execute-api:us-east-1:058299105883:nfhr09zpjg/prod/GET/*",
+          "Resource": "${aws_api_gateway_rest_api.api.execution_arn}"
+          #"Resource": "arn:aws:execute-api:${data.aws_region.current.name}:${data.aws_caller_identity.current.id}:${aws_api_gateway_rest_api.api.id}/prod/GET/*",
           "Effect": "Allow"
         },
       ]
