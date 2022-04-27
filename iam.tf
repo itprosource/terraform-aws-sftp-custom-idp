@@ -1,3 +1,8 @@
+# Data source which pulls the AWS account ID and region from Provider.
+# Used later in aws_iam_policy.sftp-attach
+data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}
+
 resource "aws_iam_role" "sftp_role" {
   name = "custom_idp_sftp_role"
 
@@ -74,7 +79,7 @@ resource "aws_iam_policy" "secrets" {
         "Action": [
           "secretsmanager:GetSecretValue"
         ],
-        "Resource": "arn:aws:secretsmanager:us-east-1:328270397459:secret:SFTP/*",
+        "Resource": "arn:aws:secretsmanager:${var.region}:${data.aws_caller_identity.current.account_id}:secret:SFTP/*",
         "Effect": "Allow"
       }
     ]
