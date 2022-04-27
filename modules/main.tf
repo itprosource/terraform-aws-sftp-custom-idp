@@ -2,6 +2,9 @@ provider "aws" {
   region = "us-east-1"
 }
 
+# As stated in README, my current IDP user password mgmt technique is to use sensitive Terraform variables hosted in
+# Hashicorp Cloud. To do this, you must declare an empty variable for each user password. I recommend naming each
+# variable with simply "_pw" appended to the username.
 variable "bsmith_pw" {}
 variable "svc-acct-app_pw" {}
 
@@ -27,6 +30,14 @@ module "sftp" {
     folder02  = "accounting"
   }
 
+  # IDP user mgmt is below. Each key is the username, while the provided values point to their password and
+  # optional HomeDirectory (leave quotes empty for the account to default to the root s3 directory).
+  # NOTE ON PASSWORDS: As described in the README, it's not secure to encode the actual password string here.
+  # In my current use-case, those values are hosted in a Hashicorp Cloud workspace as sensitive Terraform variables.
+  # As long as you have entered the empty variables above AND created the same variable with the actual password value
+  # in your Cloud workspace, then this template will grab the secret during execution without being exposed.
+  # Afterwards, the password can be securely viewed in Secrets Manager as normal.
+  # Refer back to the README for more discussion.
   idp_users = {
     bsmith02 = {
       Password = var.bsmith_pw
@@ -38,7 +49,7 @@ module "sftp" {
     }
   }
 
-  # Create your security group ingress rules. The security group is configured to allow only port 22,
+  # Create your security group ingress rules. The security group is hardcoded to allow only port 22,
   # all you need to provide are the IP rules. The below example shows a single rule which allows connections
   # from anywhere, but you could instead restrict based on IP and create multiple rules - simply add
   # "rule02", "rule03", and so on.
