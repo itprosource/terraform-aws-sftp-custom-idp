@@ -8,4 +8,3 @@ resource "aws_secretsmanager_secret_version" "secrets" {
   secret_id     = aws_secretsmanager_secret.secret[each.key].id
   secret_string = jsonencode(each.value)
 }
-*/
