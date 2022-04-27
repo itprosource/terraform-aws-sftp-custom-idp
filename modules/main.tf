@@ -2,12 +2,15 @@ provider "aws" {
   region = "us-east-1"
 }
 
+variable "bsmith_pw" {}
+
 module "sftp" {
   source = "../"
 
   # Create a name that will be used to either tag most resources or prefix to their resource name
   # for identification purposes.
   name        = "sftp-example"
+  region      = "us-east-1"
 
   # Set your VPC network details.
   cidr        = "10.0.1.0/24"
@@ -15,7 +18,7 @@ module "sftp" {
   az          = "us-east-1a"
 
   # Name your s3 bucket into which SFTP will deposit files.
-  bucket_name = "example-bucket"
+  bucket_name = "example-bucket-042722"
 
   # Optionally, you can create additional s3 folders. These could be used as user-specific home directories,
   # or for a specific use-case: "Billing", "HR", etc. Not required.
@@ -28,12 +31,24 @@ module "sftp" {
   # To add an additional user, enter the next user number (user03, etc) and set it equal to the username.
   # The user number will not appear in AWS, it's ony used by Terraform to order the secrets.
   # Only the username will be used to name the secret.
+  /*
   secrets = {
     user01    = "bsmith",
     user02    = "svc-acct-app"
   }
+  */
   # NOTE: In the current use-case, the secret strings containing password, role, etc are all meant to be
   # input manually. See the README for more info.
+
+  idp_users = {
+    bsmith = {
+      Password = var.bsmith_pw
+      HomeDirectory = "bsmith-home"
+    },
+    svc_acct-app = {
+      HomeDirectory = "accounting"
+    }
+  }
 
   # Create your security group ingress rules. The security group is configured to allow only port 22,
   # all you need to provide are the IP rules. The below example shows a single rule which allows connections
