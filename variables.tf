@@ -75,3 +75,15 @@ variable "folders" {
   description = ""
   default = {}
 }
+
+variable "idp_users" {
+  type = map(map(string))
+  description = ""
+  default = {}
+}
+
+variable "region" {
+  type = string
+  description = ""
+  default = ""
+}
