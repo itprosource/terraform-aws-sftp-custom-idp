@@ -46,14 +46,6 @@ variable "security_policy_name" {
   default = ""
 }
 
-/*
-variable "idp_users" {
-  type = map(map(string))
-  description = ""
-  default = {}
-}
-*/
-
 variable "secrets" {
   type = map(string)
   description = ""
@@ -61,6 +53,12 @@ variable "secrets" {
 }
 
 variable "rest_api_name" {
+  type = string
+  description = ""
+  default = ""
+}
+
+variable "function_name" {
   type = string
   description = ""
   default = ""
