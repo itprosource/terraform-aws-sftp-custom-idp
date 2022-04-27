@@ -5,8 +5,12 @@ provider "aws" {
 # As stated in README, my current IDP user password mgmt technique is to use sensitive Terraform variables hosted in
 # Hashicorp Cloud. To do this, you must declare an empty variable for each user password. I recommend naming each
 # variable with simply "_pw" appended to the username.
-variable "bsmith_pw" {}
-variable "svc-acct-app_pw" {}
+variable "bsmith_pw" {
+  sensitive = true
+}
+variable "svc-acct-app_pw" {
+  sensitive = true
+}
 
 module "sftp" {
   source = "../"
@@ -23,13 +27,6 @@ module "sftp" {
   # Name your s3 bucket into which SFTP will deposit files.
   bucket_name = "example-bucket-042722"
 
-  # Optionally, you can create additional s3 folders. These could be used as user-specific home directories,
-  # or for a specific use-case: "Billing", "HR", etc. Not required.
-  folders = {
-    folder01  = "bsmith-home",
-    folder02  = "accounting"
-  }
-
   # IDP user mgmt is below. Each key is the username, while the provided values point to their password and
   # optional HomeDirectory (leave quotes empty for the account to default to the root s3 directory).
   # NOTE ON PASSWORDS: As described in the README, it's not secure to encode the actual password string here.
@@ -37,6 +34,8 @@ module "sftp" {
   # As long as you have entered the empty variables above AND created the same variable with the actual password value
   # in your Cloud workspace, then this template will grab the secret during execution without being exposed.
   # Afterwards, the password can be securely viewed in Secrets Manager as normal.
+  # NOTE ON HOMEDIRECTORY: If you specify a HomeDirectory folder, then a folder will automatically be created
+  # in the s3 bucket.
   # Refer back to the README for more discussion.
   idp_users = {
     bsmith02 = {
