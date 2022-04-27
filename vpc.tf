@@ -9,7 +9,7 @@ resource "aws_vpc" "vpc" {
 
 resource "aws_vpc_endpoint" "transfer" {
   vpc_id = aws_vpc.vpc.id
-  service_name = "com.amazonaws.us-east-1.transfer.server"
+  service_name = "com.amazonaws.${data.aws_region.current.name}.transfer.server"
   vpc_endpoint_type = "Interface"
 }
 
