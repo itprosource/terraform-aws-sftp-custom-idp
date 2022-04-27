@@ -28,11 +28,11 @@ module "sftp" {
   }
 
   idp_users = {
-    bsmith01 = {
+    bsmith02 = {
       Password = var.bsmith_pw
       HomeDirectory = "bsmith-home"
     },
-    svc_acct-app01 = {
+    svc_acct-app02 = {
       Password = var.svc-acct-app_pw
       HomeDirectory = "accounting"
     }
