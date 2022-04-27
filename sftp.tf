@@ -114,7 +114,6 @@ resource "aws_iam_role_policy" "invoke_api" {
         "Action": [
           "execute-api:Invoke"
         ],
-        #"Resource": "arn:aws:execute-api:us-east-1:417297593891:nn2h7kdeij/prod/*",
         "Resource": "${aws_api_gateway_stage.custom_idp.execution_arn}/*",
         "Effect": "Allow"
       }
