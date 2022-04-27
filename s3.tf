@@ -7,10 +7,10 @@ resource "aws_s3_bucket" "s3" {
   }
 }
 
-resource "aws_s3_bucket_object" "home_directory" {
-  for_each = var.folders
+resource "aws_s3_object" "home_directory" {
+  for_each = var.idp_users
   bucket       = aws_s3_bucket.s3.id
-  key          = "${each.value}/"
+  key          = "${each.value["HomeDirectory"]}/"
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "sftp" {
