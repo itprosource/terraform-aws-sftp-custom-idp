@@ -8,7 +8,7 @@ public or private) which is then directed toward API gateway. The formulated
 request in API Gateway is then sent to the accompanying Lambda function which 
 processes the request against user accounts specified in Secrets Manager.
 
-Files are stored in s3. User accounts can be set up with home directories, if desired.
+Files are stored in an encrypted s3 bucket. User accounts can be set up with home directories, if desired.
 
 ### Custom Identities
 User accounts are stored in Secrets Manager. You can manage user accounts in this template
