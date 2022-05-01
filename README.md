@@ -1,4 +1,21 @@
-# terraform-aws-pw-auth-sftp
+<div id="top"></div>
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/itprosource/terraform-aws-cisco-ngfw-vpc">
+  </a>
+
+<h3 align="center">Terraform - Transfer Family SFTP with Customer Identity Provider</h3>
+
+  <p align="center">
+    Template which deploys deploys an AWS Transfer Family SFTP server with s3 repository in a security group-controlled VPC environment leveraging a custom identity provider operating through API Gateway, Lambda, and Secrets Manager. 
+    <br />
+  </p>
+</div>
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
 This module deploys an AWS Transfer Family SFTP server with s3 repository in a security
 group-controlled VPC environment leveraging a custom identity provider
 operating through API Gateway, Lambda, and Secrets Manager. 
@@ -53,3 +70,9 @@ is generally not recommended unless absolutely necessary. Otherwise, filter by I
 As time permits, I plan to work on the following updates:
 1. Make s3 bucket creation optional, with the option to instead use an existing bucket.
 2. Design infrastructure options for pure private deployment - no public IP or extra-AWS traffic.
+
+### Built With
+
+* [Terraform](https://www.terraform.io/)
+
+
