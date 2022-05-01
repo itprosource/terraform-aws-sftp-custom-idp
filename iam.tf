@@ -63,7 +63,7 @@ resource "aws_iam_policy_attachment" "sftp-attach" {
 
 resource "aws_iam_policy" "secrets" {
   name        = "custom-idp-secrets"
-  description = "My test policy"
+  description = "Secrets Mgr policy allowing access for SFTP server"
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
@@ -82,7 +82,7 @@ resource "aws_iam_policy" "secrets" {
 }
 
 resource "aws_iam_policy_attachment" "secrets-attach" {
-  name       = "sftp-attachment"
+  name       = "secrets-attachment"
   roles      = [aws_iam_role.iam_for_lambda.name]
   policy_arn = aws_iam_policy.secrets.arn
 }
