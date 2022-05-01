@@ -20,7 +20,7 @@ resource "aws_iam_role" "sftp_role" {
 
 resource "aws_iam_policy" "sftp" {
   name        = "custom-idp-sftp"
-  description = "My test policy"
+  description = "s3 access policy for custom identities"
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
